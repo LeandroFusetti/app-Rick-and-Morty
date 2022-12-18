@@ -1,19 +1,23 @@
 import Card from './Card';
+import styles from "./Cards.module.css"
+import React from 'react';
 
 export default function Cards(props) {
    const { characters } = props;
    return(
-      <div>
+      <div className={styles.divContainer}>
          {
             characters.map(charapter=>(
                <Card
-                     {...charapter}      //como la variable y el valor tienen el mismo nombre puedo ponerlo asi
-
+                      {...charapter}      //como la variable y el valor tienen el mismo nombre puedo ponerlo asi
+                     key={charapter.id}
                       /* name={character.name}
                      gender={charapter.gender}
                      species={charapter.species}
                      image={charapter.image} */
-                     onClose={() => window.alert('Emulamos que se cierra la card')}
+                     id={charapter.id}
+
+                     onClose={props.onClose}
                />
             ))
          }
