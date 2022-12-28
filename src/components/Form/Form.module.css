@@ -1,0 +1,12 @@
+.warning {
+  border: solid red 2px;
+  border-radius: 0.2em;
+  
+}
+
+.danger {
+  font-size: 12px;
+  color: red;
+  margin-left: 2em;
+ 
+}
