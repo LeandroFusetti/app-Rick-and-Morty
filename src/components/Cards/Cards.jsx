@@ -4,6 +4,7 @@ import React from 'react';
 
 export default function Cards(props) {
    const { characters } = props;
+   
    return(
       <div className={styles.divContainer}>
          {characters.length>0 

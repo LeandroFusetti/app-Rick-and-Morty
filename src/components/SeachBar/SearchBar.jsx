@@ -21,6 +21,8 @@ export default function SearchBar(props) {
          <button onClick={()=>props.onSearch(randomNumber())} >Random</button>
          <button onClick={props.onCloseAll}>Borrar todo</button>
          <button onClick={props.logOut}>Log out</button>
+         <button onClick={props.goToFavorites}>Favoritos</button>
+         <button onClick={props.backHome} >Volver</button> 
          
          <Link to='/about'>
             <button>About</button>
