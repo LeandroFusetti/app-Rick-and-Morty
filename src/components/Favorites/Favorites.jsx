@@ -1,16 +1,30 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { filterCards, orderCards } from '../../redux/actions/action'
 import styles from './Favorites.module.css'
 
 /* class Favorites extends React.Component{ */
     
     function Favorites(props){
         
-        const favoritosFiltrados = props.characters.filter((fav)=> props.myFavorites.includes(fav.id) )  
-        console.log(props.myFavorites);
-        console.log(props.characters);
-        console.log(favoritosFiltrados);
 
+           
+             
+        console.log(props.myFavorites);
+        console.log(props.myFavoritesOrigin);
+
+        console.log(props.characters);
+        
+        const handleClickFiltered = (e)=>{
+            const objetivo = e.target.value
+            props.filterCards(objetivo)
+           
+        }
+
+        const handleClickOrdered= (e)=>{
+            const objetivo = e.target.value
+            props.orderCards(objetivo)
+        }
         /* React.useEffect(() => {
             const favoritosFiltrados = props.characters.filter((fav)=>{return fav.id === props.myFavorites})  
             myFavorites.forEach((fav) => {
@@ -21,9 +35,21 @@ import styles from './Favorites.module.css'
          }, [myFavorites]); */
         return(
             <div className={styles.divContainer}>
+                <div>
+                    <select name="gender" onChange={handleClickFiltered}>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Genderless">Genderless </option>
+                        <option value="unknown">unknown</option>
+                    </select>
+                    <select name="order" onChange={handleClickOrdered}>
+                        <option value="Ascendente">Ascendente</option>
+                        <option value="Descendente">Descendente</option>
+                       
+                    </select>
+                </div>
                 
-                
-                {favoritosFiltrados.map((fav)=>{
+                {props.myFavorites.map((fav)=>{
                     console.log(fav);
                     return(
                        
@@ -43,4 +69,11 @@ const mapStateToProps = (state)=>{
     }
 }
 
-export default connect(mapStateToProps,null)(Favorites)
+const mapDispatchToProps = (dispatch)=>{
+    return {
+        filterCards : (selector)=>dispatch(filterCards(selector)),
+        orderCards: (id)=>dispatch(orderCards(id))
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Favorites)

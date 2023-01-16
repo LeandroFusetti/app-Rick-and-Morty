@@ -1,8 +1,8 @@
-const {ADD_FAVORITES ,DELETE_FAVORITES}= require ('./types.js')
-const addFavorites= (id)=>{
+const {ADD_FAVORITES ,DELETE_FAVORITES, FILTER, ORDER}= require ('./types.js')
+const addFavorites= (characters)=>{
     return {
         type: ADD_FAVORITES,
-        payload: id
+        payload: characters
     }
 }
 
@@ -13,8 +13,23 @@ const deleteFavorites= (id)=>{
     }
 }
 
+const filterCards =(status)=>{
+    return {
+        type: FILTER,
+        payload: status
+    }
+}
+
+const orderCards = (id)=>{
+    return {
+        type: ORDER,
+        payload: id
+    }
+}
 
 module.exports={
     addFavorites,
-    deleteFavorites
+    deleteFavorites,
+    orderCards,
+    filterCards
 }

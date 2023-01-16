@@ -1,6 +1,7 @@
-const {ADD_FAVORITES,DELETE_FAVORITES}= require ('../actions/types.js')
+const {ADD_FAVORITES,DELETE_FAVORITES,FILTER,ORDER}= require ('../actions/types.js')
 const initialState = {
-    myFavorites: []
+    myFavorites: [],
+    myFavoritesOrigin:[]
 }
 
 const rootReducer =(state =initialState,action)=>{
@@ -8,16 +9,34 @@ const rootReducer =(state =initialState,action)=>{
         case ADD_FAVORITES:
             return{
                 ...state,
-                myFavorites:[...state.myFavorites, action.payload]
+                myFavorites:[...state.myFavoritesOrigin, action.payload],
+                myFavoritesOrigin:[...state.myFavoritesOrigin, action.payload],
             };
         case DELETE_FAVORITES:
-            const filtrado= state.myFavorites.filter(id=>
-                id != action.payload)
+            const filtrado= state.myFavorites.filter(ch=>
+                ch.id != action.payload)
             return{
                 ...state,
-                myFavorites: filtrado
+                myFavorites: filtrado,
+                myFavoritesOrigin: filtrado
             };
-        
+        case FILTER:
+            const filtradoGender =[...state.myFavoritesOrigin].filter(x=> x.gender == action.payload)
+            return{
+                ...state,
+                myFavorites: filtradoGender
+            };
+        case ORDER:
+            const filtradoOrder  =[...state.myFavoritesOrigin].sort((a,b)=>{
+                if(a.id>b.id)return "Ascendente" == action.payload ?1 :-1
+                if(a.id<b.id)return "Descendente" == action.payload ?1 :-1
+
+            });
+            return{
+                ...state,
+                myFavorites: filtradoOrder
+
+            }
         default: 
         return{...state }
     }

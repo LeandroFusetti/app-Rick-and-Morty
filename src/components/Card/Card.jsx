@@ -1,12 +1,12 @@
 import styles from "./Card.module.css"
 import {useState,useEffect} from "react";
 import {Link} from 'react-router-dom'
-import {connect,useSelector,useDispatch} from 'react-redux'
+import {useSelector,useDispatch} from 'react-redux'
 
 
 const { addFavorites, deleteFavorites} =require ("../../redux/actions/action");
 
-export default function Card({name,species, gender,image, onClose,id}) { //en vez de usar props, lo desesctructuro
+export default function Card(props) { //en vez de usar props, lo desesctructuro
 
 const[isFav,setIsFav]=useState(false)
 console.log(isFav);
@@ -15,22 +15,22 @@ const dispatch = useDispatch() //seria como el mapDispatchToProps
 const myFavorites = useSelector((s)=>s.myFavorites) //seria como el mapStateToProps
 console.log(myFavorites);
 
-const handleFavorite = (id)=>{
+const handleFavorite = (characters)=>{
    if(isFav){
-      console.log('+');
+      
       setIsFav(false)
-      dispatch(deleteFavorites(id))
+      dispatch(deleteFavorites(characters.id))
    }
    else{
-      console.log('-');
+      
       setIsFav(true)
-      dispatch(addFavorites(id))
+      dispatch(addFavorites(characters))
    }
 }
 
 useEffect(() => {
-   myFavorites.forEach((fav) => {
-      if (fav === id) {
+   myFavorites.forEach((characters) => {
+      if (characters.id === props.id) {
          setIsFav(true);
       }
    });
@@ -40,21 +40,21 @@ useEffect(() => {
       <div className={styles.containterCards}>
          <div>
 
-         <button className={styles.closeButton} onClick={()=>onClose(id)}>X</button>
+         <button className={styles.closeButton} onClick={()=>props.onClose(props.id)}>X</button>
          {
             isFav ? (
-               <button style={{'padding':'5px', 'margin':'10px', 'position':'relative' ,'right':'130px'}}onClick={()=>handleFavorite(id)}>❤️</button>
+               <button style={{'padding':'5px', 'margin':'10px', 'position':'relative' ,'right':'130px'}}onClick={()=>handleFavorite(props)}>❤️</button>
                ) : (
-                  <button style={{'padding':'5px', 'margin':'10px', 'position':'relative' ,'right':'130px'}}onClick={()=>handleFavorite(id)}>🤍</button>
+                  <button style={{'padding':'5px', 'margin':'10px', 'position':'relative' ,'right':'130px'}}onClick={()=>handleFavorite(props)}>🤍</button>
                   )
                }
          </div>
-         <img  src={image} alt="avatar" width='300px'/>
-         <Link to={`/detail/${id}`} style={{textDecoration:'none',color:'red'}}>
-            <p>{name}</p>  
+         <img  src={props.image} alt="avatar" width='300px'/>
+         <Link to={`/detail/${props.id}`} style={{textDecoration:'none',color:'red'}}>
+            <p>{props.name}</p>  
          </Link>
-         <p>Specie: {species}</p>
-         <p>Gender: {gender}</p>  
+         <p>Specie: {props.species}</p>
+         <p>Gender: {props.gender}</p>  
          
       </div>
    ); //podria haber puesto props.name
