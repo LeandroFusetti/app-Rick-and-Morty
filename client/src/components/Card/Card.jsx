@@ -34,7 +34,7 @@ useEffect(() => {
          setIsFav(true);
       }
    });
-}, [myFavorites]);
+}, [myFavorites,props]);
 
    return (
       <div className={styles.containterCards}>

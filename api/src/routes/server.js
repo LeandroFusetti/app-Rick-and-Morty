@@ -2,18 +2,28 @@ const http= require('http')
 const fs = require('fs')
 const PORT=3001
 const characters= require('../utils/data.js')
+const {getCharById}= require('../controllers/getCharById.js')
+const {getCharDetail}= require('../controllers/getCharDetail.js')
 
 
 http.createServer((req,res)=>{
    
     const allUrl = req.url.split('/')
-    console.log(allUrl);
     const id= Number(allUrl.pop())
-    console.log(req.url);
     const url= allUrl.join('/')
-    console.log(url);
-    if(url=='/rickandmorty/character'){
-        
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    switch(url){
+        case '/onsearch':
+            return getCharById(res,id);
+        case '/detail':
+            return getCharDetail(res,id);
+        default:
+            res.writeHead(404,{'Content-Type':'text/plain'})
+            res.end('Route not found')    
+    }
+
+
+    /* if(url=='/rickandmorty/character'){
             const character= characters.find(ch=>ch.id===id)
             if(character){
                 res.writeHead(200,{'Content-Type':'application/Json'})
@@ -29,8 +39,8 @@ http.createServer((req,res)=>{
     }else{
         res.writeHead(404,{'Content-Type':'text/plain'})
             res.end('Route not found') 
-    }
-    console.log(req.url);
+    } */
+    
     /* switch (req.url){
         case '/rickandmorty/characters':
             res.writeHead(200,{'Content-Type':'application/Json'})

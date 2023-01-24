@@ -1,4 +1,4 @@
-const {ADD_FAVORITES,DELETE_FAVORITES,FILTER,ORDER}= require ('../actions/types.js')
+const {ADD_FAVORITES,DELETE_FAVORITES,FILTER,ORDER,DELETE_ALL}= require ('../actions/types.js')
 const initialState = {
     myFavorites: [],
     myFavoritesOrigin:[]
@@ -37,6 +37,13 @@ const rootReducer =(state =initialState,action)=>{
                 myFavorites: filtradoOrder
 
             }
+        case DELETE_ALL:
+            return{
+                ...state,
+                myFavorites: [],
+                myFavoritesOrigin:[]
+            }
+            
         default: 
         return{...state }
     }
