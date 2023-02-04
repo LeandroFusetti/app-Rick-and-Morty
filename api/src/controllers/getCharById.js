@@ -1,4 +1,4 @@
-const getCharById = (res,id)=>{
+/* const getCharById = (res,id)=>{
     fetch(`https://rickandmortyapi.com/api/character/${id}`)
     .then(response=>response.json())
     .then(data=>{
@@ -9,16 +9,14 @@ const getCharById = (res,id)=>{
             species:data.species,
             id:data.id
         }
-        res.writeHead(200,{'Content-Type':'application/json'})
-        
-        res.end(JSON.stringify(character))
+        return character
     })
     .catch(err=>{
-        res.writeHead(500,{'Content-Type':'text/plain'})
-        res.end('not found character')
+        
+        throw Error('not found character')
     })
 }
 
 module.exports={
     getCharById
-}
+} */

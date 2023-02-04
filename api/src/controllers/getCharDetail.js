@@ -1,4 +1,4 @@
-const getCharDetail = (res,id)=>{
+/* const getCharDetail = (res,id)=>{
     fetch(`https://rickandmortyapi.com/api/character/${id}`)
     .then(response=>response.json())
     .then(data=>{
@@ -23,4 +23,4 @@ const getCharDetail = (res,id)=>{
 
 module.exports={
     getCharDetail
-}
+} */

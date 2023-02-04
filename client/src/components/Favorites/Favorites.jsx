@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { filterCards, orderCards } from '../../redux/actions/action'
+import { filterCards, orderCards } from '../../redux/actions/action.js'
 import styles from './Favorites.module.css'
 
 /* class Favorites extends React.Component{ */

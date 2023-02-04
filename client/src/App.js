@@ -8,7 +8,7 @@ import Favorites from './components/Favorites/Favorites'
 import { useDispatch } from 'react-redux'
 import {useState, useEffect} from 'react'
 import {Routes,Route, useNavigate, useLocation} from 'react-router-dom'
-import { deleteFavorites,deleteAll } from './redux/actions/action'
+import {deleteFavorites,deleteAll } from './redux/actions/action.js'
 
 
 function App () {
@@ -54,7 +54,7 @@ console.log(access);
   const onSearch = (character)=>{
     
     if(!characters.some(x=> x.id === parseInt(character))){
-    fetch(`http://localhost:3001/onsearch/${character}`)
+    fetch(`http://localhost:3001/rickandmorty/character/${character}`)
       .then((response) => response.json())
       .then((data) => {
          if (data.name) {
